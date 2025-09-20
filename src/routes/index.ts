@@ -1,26 +1,57 @@
-import { FastifyInstance, FastifyPluginOptions } from "fastify";
-import courseRoutes from "./course.routes";
-import sectionRoutes from "./section.routes";
-import lessonRoutes from "./lesson.routes";
-import enrollmentRoutes from "./enrollment.routes";
-import quizRoutes from "./quizze.routes";
-import reviewsRoutes from "./reviews.routes";
-import assignCourseRoutes from "./assignCourse.route";
-import completedAssignCourseRoutes from "./completedAssignCourse.routes";
+import actionRoutes from "./action.routes";
+import authRoutes from "./auth.routes";
+import permissionRoutes from "./permission.routes";
+import roleRoutes from "./role.route";
+import tenantConfigurationRoutes from "./tenant-configuration.route";
+import tenantRoutes from "./tenant.routes";
+import topicRoutes from "./topic.routes";
+import userPreferencesRoutes from "./user-preferences.route";
+import userRoutes from "./user.route";
+import opinionRoutes from "./opinion.routes";
+import { commentRoutes } from "./comment.routes";
 
-export default async function routes(
-  fastify: FastifyInstance,
-  opts: FastifyPluginOptions
-) {
-  fastify.get("/health", async (request, reply) => {
-    return { status: "ok", timestamp: new Date().toISOString() };
-  });
-  fastify.register(courseRoutes, { prefix: "/client/:client_id" });
-  fastify.register(lessonRoutes, { prefix: "/client/:client_id" });
-  fastify.register(sectionRoutes, { prefix: "/client/:client_id" });
-  fastify.register(assignCourseRoutes, { prefix: "/client/:client_id" });
-  fastify.register(completedAssignCourseRoutes,{ prefix: "/client/:client_id" });
-  // fastify.register(enrollmentRoutes, { prefix: "/client/:client_id" });
-  // fastify.register(quizRoutes, { prefix: "/client/:client_id" });
-  // fastify.register(reviewsRoutes, { prefix: "/client/:client_id" });
-}
+let routes: any = [];
+
+actionRoutes.forEach((route: any) => {
+    routes.push(route);
+});
+
+authRoutes.forEach((route: any) => {
+    routes.push(route);
+});
+
+permissionRoutes.forEach((route: any) => {
+    routes.push(route);
+});
+
+roleRoutes.forEach((route: any)=> {
+  routes.push(route);
+})
+
+tenantConfigurationRoutes.forEach((route: any)=> {
+  routes.push(route);
+})
+
+tenantRoutes.forEach((route: any)=> {
+  routes.push(route);
+})
+
+userPreferencesRoutes.forEach((route: any)=> {
+  routes.push(route);
+})
+
+userRoutes.forEach((route: any)=>{
+  routes.push(route);
+})
+
+topicRoutes.forEach((route:any)=>{
+  routes.push(route);
+})
+
+opinionRoutes.forEach((route: any) => {
+  routes.push (route);
+})
+commentRoutes.forEach((route: any)=>{
+  routes.push(route);
+})
+export default routes;
